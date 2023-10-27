@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .models import Registration
+from django.core.mail import send_mail
 
 class RegistrationCreate(CreateView):
     model = Registration
@@ -28,4 +29,9 @@ class RegistrationDelete(DeleteView):
 def index(request):
     return render(request, 'newapp/index.html')
 def subscribe(request):
-    return render(request, 'newapp/subscribe.html')
+    if request.method == "GET":
+        return render(request, 'newapp/subscribe.html')
+    elif request.method == "POST":
+        email = request.POST['email']
+        print(email)
+        return redirect('index')
