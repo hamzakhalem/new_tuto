@@ -65,13 +65,6 @@ class JasonClass(View):
 class EmployeeCv(View):
     def get(self, request, *args, **kwargs):
          emp = Employee.objects.get(eid=2)
-        #  emp = json.dumps(emp)
-        #  emp = {
-        #     "eid" : emp.eid,
-        #     "ename" : emp.ename,
-        #     "ecity" : emp.ecity,
-        #     "esalaey" : emp.esalary,
-        # }
          return HttpResponse(serialize('json',[emp]), content_type="application/json")
     
     def post(self, request, *args, **kwargs):
