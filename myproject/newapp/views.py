@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .models import Registration
 from django.core.mail import send_mail
+import json
 
 class RegistrationCreate(CreateView):
     model = Registration
@@ -35,3 +36,28 @@ def subscribe(request):
         email = request.POST['email']
         print(email)
         return redirect('index')
+
+def displayEmployee(request):
+    emp = {
+        'eid' : "2",
+        'ename' : "chedjra",
+        'ecity' : "alger",
+    }
+    reuslt = json.dumps(emp)
+    return HttpResponse(reuslt, content_type="application/json")
+
+from django.views.generic import View
+
+class JasonClass(View):
+    def get(self, request, *args, **kwargs):
+         emp = {
+                'eid' : "2",
+                'ename' : "chedjra",
+                'ecity' : "alger",
+            }
+         return JsonResponse(emp)
+    def post(self, request, *args, **kwargs):
+        result={
+            "msg" : "true"
+        }
+        return JsonResponse(result)
