@@ -27,3 +27,5 @@ class RegistrationDelete(DeleteView):
 # Create your views here.
 def index(request):
     return render(request, 'newapp/index.html')
+def subscribe(request):
+    return render(request, 'newapp/subscribe.html')
