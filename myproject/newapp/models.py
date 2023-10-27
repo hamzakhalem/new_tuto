@@ -10,3 +10,8 @@ class Registration(models.Model):
     def __str__(self):
         return self.fname
     
+class Employee(models.Model):
+    eid = models.IntegerField()
+    ename = models.CharField(max_length=300, null=True, blank=True)
+    ecity = models.CharField(max_length=300, null=True, blank=True)
+    esalary = models.FloatField(null=True,)

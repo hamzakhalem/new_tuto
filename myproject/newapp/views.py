@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-from .models import Registration
+from .models import Registration, Employee
 from django.core.mail import send_mail
 import json
 
@@ -47,7 +47,7 @@ def displayEmployee(request):
     return HttpResponse(reuslt, content_type="application/json")
 
 from django.views.generic import View
-
+from django.core.serializers import serialize 
 class JasonClass(View):
     def get(self, request, *args, **kwargs):
          emp = {
@@ -56,6 +56,24 @@ class JasonClass(View):
                 'ecity' : "alger",
             }
          return JsonResponse(emp)
+    def post(self, request, *args, **kwargs):
+        result={
+            "msg" : "true"
+        }
+        return JsonResponse(result)
+
+class EmployeeCv(View):
+    def get(self, request, *args, **kwargs):
+         emp = Employee.objects.get(eid=2)
+        #  emp = json.dumps(emp)
+        #  emp = {
+        #     "eid" : emp.eid,
+        #     "ename" : emp.ename,
+        #     "ecity" : emp.ecity,
+        #     "esalaey" : emp.esalary,
+        # }
+         return HttpResponse(serialize('json',[emp]), content_type="application/json")
+    
     def post(self, request, *args, **kwargs):
         result={
             "msg" : "true"
