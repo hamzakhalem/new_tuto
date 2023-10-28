@@ -72,3 +72,6 @@ class EmployeeCv(View):
             "msg" : "true"
         }
         return JsonResponse(result)
+    
+
+# save(), get(), all(), filter(), count(), 
