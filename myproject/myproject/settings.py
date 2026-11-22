@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e=0al-j)+ph7b-l+0z3r4j1yyt_*j6jqm=97hb8s!y$wjnq$(('
+# Set DJANGO_SECRET_KEY in production. Without it, a random key is generated at each start (fine for local use).
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY") or get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
